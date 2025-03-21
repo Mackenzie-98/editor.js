@@ -242,3 +242,96 @@ CodeX is a team of digital specialists around the world interested in building h
 | 🌐 | Join  👋  | Twitter | Instagram |
 | -- | -- | -- | -- |
 | [codex.so](https://codex.so) | [codex.so/join](https://codex.so/join) |[@codex_team](http://twitter.com/codex_team) | [@codex_team](http://instagram.com/codex_team/) |
+
+# WordJet Editor.js Implementation
+
+This implementation replaces TipTap with Editor.js to create a Notion-like editing experience in the WordJet application.
+
+## Features
+
+- **Rich Block-Based Editing**: Create structured content with various block types
+- **Slash Commands**: Type `/` to access a Notion-like command menu
+- **AI Integration**: AI assistant to help generate content
+- **Format Conversion**: Automatic conversion between HTML, Markdown, and Editor.js formats
+- **Customizable**: Easily extendable with additional block types and features
+
+## Components
+
+The implementation consists of the following components:
+
+- **EditorJS.tsx**: Main editor component that integrates all features
+- **SlashMenu.tsx**: Slash command menu for block insertion
+- **AIToolbox.tsx**: AI assistance for content generation
+- **FormatAdapter.ts**: Utility for format conversion
+- **editor.d.ts**: TypeScript type definitions
+
+## Installation
+
+Run the installation script to install Editor.js and its plugins:
+
+```bash
+./install-editorjs.sh
+```
+
+## Usage
+
+### Basic Usage
+
+The editor can be used as a drop-in replacement for TipTap:
+
+```tsx
+import EditorComponent from "@/components/editor/EditorComponent";
+
+function MyPage() {
+  const handleChange = (content: string) => {
+    // Handle content changes
+    console.log(content);
+  };
+
+  return (
+    <EditorComponent
+      initialContent="Initial content here"
+      onChange={handleChange}
+    />
+  );
+}
+```
+
+### Advanced Usage
+
+For more advanced use cases, you can directly use the `NotionLikeEditor` component:
+
+```tsx
+import dynamic from "next/dynamic";
+
+const NotionLikeEditor = dynamic(() => import("@/components/notion-editor/EditorJS"), {
+  ssr: false,
+});
+
+function AdvancedEditor() {
+  return (
+    <NotionLikeEditor
+      content="Initial content"
+      onChange={(newContent) => console.log(newContent)}
+      placeholder="Start typing..."
+      readOnly={false}
+    />
+  );
+}
+```
+
+## AI Integration
+
+The AI integration is currently simulated. To connect to a real AI service:
+
+1. Modify the `handleGenerate` function in `AIToolbox.tsx`
+2. Implement the corresponding API endpoints in your backend
+3. Update the API configuration in the application
+
+## Additional Documentation
+
+For more detailed information, see:
+
+- [EDITORJS-IMPLEMENTATION-GUIDE.md](./EDITORJS-IMPLEMENTATION-GUIDE.md) - Detailed implementation guide
+- [Editor.js Official Documentation](https://editorjs.io/getting-started/) - Editor.js documentation
+- [Editor.js Plugins](https://github.com/editor-js/awesome-editorjs) - List of available plugins 
